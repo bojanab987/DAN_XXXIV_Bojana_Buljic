@@ -10,10 +10,10 @@ namespace Zadatak_1
         //object wich will lock the code in method
         private object thisLock = new object();
         //The amount of money in the bank on the start of aplication
-        public static int availableMoney = 10000;
-        public static int atmId;
+        static int availableMoney = 10000;
+        int atmId;
         //field presents the number of a client that is in row for withdrawing money.
-        public static int client = 0;
+        static int client = 0;
         static Random rnd = new Random();
 
         /// <summary>

@@ -56,12 +56,11 @@ namespace Zadatak_1
             }
 
             //Starting of all threads
-            for (int i = 0; i < threads.Length; i++)
+            foreach (var i in threads)
             {
-
-                threads[i].Start();
-                Thread.Sleep(1000);
+                i.Start();               
             }
+            
             Console.ReadLine();
         }
     }
