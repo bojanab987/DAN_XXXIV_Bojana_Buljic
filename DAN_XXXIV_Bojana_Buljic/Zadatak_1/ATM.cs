@@ -12,8 +12,8 @@ namespace Zadatak_1
         //The amount of money in the bank on the start of aplication
         public static int availableMoney = 10000;
         public static int atmId;
-        //field presents the number of customer that is in row for withdrawing money.
-        public static int customerNo = 0;
+        //field presents the number of a client that is in row for withdrawing money.
+        public static int client = 0;
         static Random rnd = new Random();
 
         /// <summary>
@@ -27,28 +27,25 @@ namespace Zadatak_1
 
         /// <summary>
         /// Method for money withdrowal from ATM
-        /// </summary>
-        /// <param name="amount">Integer paramater representing the amount for withdrawal from ATM</param>
-        public void Withdraw(int amount)
+        /// </summary>        
+        public void Withdraw()
         {
             //locks the code preventing for another thread to perform the method at the same time
             //one client at a time can withdraw money from ATM
             lock (thisLock)
             {
-                amount = rnd.Next(100, 10000);
-                Console.WriteLine("Customer {0} trying to withdraw {1} RSD from ATM {2}", ++customerNo, amount, atmId);
+                int amount = rnd.Next(100, 10000);
+                Console.WriteLine("Client {0} trying to withdraw {1} RSD from ATM {2}", ++client, amount, atmId);
                 if (availableMoney >= amount)
                 {
                     availableMoney -= amount;
-                    Console.WriteLine("Customer {0} withdrew {1} RSD from ATM {2}", customerNo, amount, atmId);
+                    Console.WriteLine("Client {0} withdrew {1} RSD from ATM {2}", client, amount, atmId);
                     Console.WriteLine("Available money left in bank: {0}", availableMoney);
                 }
                 else
                 {
-                    if (availableMoney <= 0)
-                    {
-                        Console.WriteLine("No available amount of {0} in ATM", amount);
-                    }
+                    Console.WriteLine("No available amount of {0} in ATM", amount);
+
                 }
             }
         }
