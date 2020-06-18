@@ -3,13 +3,16 @@
 namespace Zadatak_1
 {
     /// <summary>
-    /// Class ATM responsible for creating ATM objects
+    /// Class ATM responsible for creating ATM objects and performing Withdrawal of money
     /// </summary>
     public class ATM
     {
+        //object wich will lock the code in method
         private object thisLock = new object();
+        //The amount of money in the bank on the start of aplication
         public static int availableMoney = 10000;
         public static int atmId;
+        //field presents the number of customer that is in row for withdrawing money.
         public static int customerNo = 0;
         static Random rnd = new Random();
 
@@ -28,11 +31,12 @@ namespace Zadatak_1
         /// <param name="amount">Integer paramater representing the amount for withdrawal from ATM</param>
         public void Withdraw(int amount)
         {
-
+            //locks the code preventing for another thread to perform the method at the same time
+            //one client at a time can withdraw money from ATM
             lock (thisLock)
             {
                 amount = rnd.Next(100, 10000);
-                Console.WriteLine("Customer {0} trying to withdraw {1} RSD from ATM {2}", customerNo++, amount, atmId);
+                Console.WriteLine("Customer {0} trying to withdraw {1} RSD from ATM {2}", ++customerNo, amount, atmId);
                 if (availableMoney >= amount)
                 {
                     availableMoney -= amount;
